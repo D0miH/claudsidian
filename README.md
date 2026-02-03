@@ -3,15 +3,15 @@ AI-enhanced Obsidian research vault for academic paper reading and project manag
 
 ---
 
-## 📁 What's in This Folder?
+## 📁 What's in This Vault?
 
-This `.claude` folder contains configuration and documentation that integrates Claude AI with your Obsidian vault:
+This vault integrates Claude AI with Obsidian for academic research. Key files:
 
-- **`CLAUDE.md`** — Core instructions for Claude on how to work with this vault (structure, linking rules, knowledge flow)
-- **`README.md`** — This file; setup and usage guide
-- **`settings.local.json`** — Permission settings for Claude's terminal and web access
-- **`vault_index.md`** — Quick reference of active MOCs and projects in the vault
-- **`skills/read_paper/SKILL.md`** — Automated paper-to-notes workflow (converts papers into structured Obsidian notes)
+- **`README.md`** — This file; setup and usage guide (project root)
+- **`.claude/CLAUDE.md`** — Core instructions for Claude on how to work with this vault (structure, linking rules, knowledge flow)
+- **`.claude/settings.local.json`** — Permission settings for Claude's terminal and web access
+- **`.claude/vault_index.md`** — Quick reference of active MOCs and projects in the vault
+- **`.claude/skills/read_paper/SKILL.md`** — Automated paper-to-notes workflow (converts papers into structured Obsidian notes)
 
 ---
 
@@ -33,7 +33,8 @@ Your vault needs these core folders:
 
 ```
 vault/
-├── .claude/          # Claude configuration (this folder)
+├── README.md         # This file
+├── .claude/          # Claude configuration
 ├── Projects/         # Atomic research ideas
 ├── Reading/          # Paper notes
 ├── MOCs/            # Maps of Content (research area hubs)
@@ -143,7 +144,7 @@ Edit these files to adjust behavior:
 ---
 
 ## ⚙️ Technical Details
-
+.claude/CLAUDE.md` as custom instructions and uses the skills defined in `.claude/
 The `.claude` folder is automatically detected by Claude Code when opening this workspace. Claude reads `CLAUDE.md` as custom instructions and uses the skills defined in `skills/` for specialized workflows.
 
 Permissions in `settings.local.json` allow Claude to:
