@@ -149,21 +149,26 @@ Answer each subsection prompt with bullet points:
 
 **Part B: Propose new projects (requires user approval)**
 
-While reading, extract ideas that don't fit existing projects:
-- unexplained behavior
-- open questions
-- surprising results
-- limitations
-- failure cases
-- signals suggesting deeper mechanisms
+**CRITICAL: Ground proposals in the paper itself, not inferred extensions**
+
+Extract ideas **directly from the paper's content**:
+- Explicit open questions the paper identifies (e.g., "future work", "unclear", "remains to be seen")
+- Limitations the authors acknowledge
+- Unexplained observations or surprising results mentioned in the paper
+- Assumptions stated but not tested
+- Gaps the paper identifies in prior work
+- Follow-up experiments the paper suggests
+
+**DO NOT infer extensions beyond what the paper discusses.** If the paper doesn't mention it, don't propose it.
 
 **Before creating ANY new project files:**
-1. List all potential NEW project ideas you identified
-2. For each idea, provide:
-   - Proposed project title (describes the idea, not the paper)
-   - 1-2 sentence description of what the project would explore
+1. **Re-read the paper's "Limitations / Open Questions" section** you filled in step 2
+2. For each open question or limitation that could be a standalone project:
+   - Proposed project title (describes the idea, grounded in paper content)
+   - Quote or paraphrase from the paper showing where this question/gap appears
+   - 1-2 sentence description of what it would explore
    - Note if it's related to any existing project
-3. Ask the user: "Should I create project files for all of these, or would you like to select specific ones?"
+3. Ask the user: "Should I create project files for these, or would you like to select specific ones?"
 4. Wait for user response
 5. Only create the approved new projects
 

@@ -1,6 +1,13 @@
 # Vault Index
+
 ## Research Areas (MOCs)
 
-## Inactive Projects
+## Seed Projects
+
+## Idea Projects
 
 ## Active Projects
+
+## Writing Projects
+
+## Finished Projects
