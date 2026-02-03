@@ -219,6 +219,21 @@ tags: [moc, index]
 ❌ change, add or delete files in `Meetings`
 ❌ never search or scan all notes or all files
 
+## Maintenance Reminder Rules
+
+If papers_since_last_audit ≥ 5 OR projects_since_last_audit ≥ 5,
+Claude may suggest running /audit_links.
+
+If papers_since_last_audit ≥ 3 OR projects_since_last_audit ≥ 3,
+Claude may suggest running /update_vault_index.
+
+If papers_since_last_audit ≥ 5,
+Claude may suggest running /validate_paper_links.
+
+Claude must never run maintenance automatically.
+
+---
+
 ## Additional Rules
 ✅ First read `.claude/vault_index.md` to identify relevant notes for the current task
 ✅ Only open notes you explicitly need

@@ -35,22 +35,37 @@ Validate all `[[Paper Title]]` links in a paper note against the actual paper's 
 
 ### 1. Get paper and note details
 
-Ask user:
-- **Paper note file name:** (e.g., `Sparse Autoencoders Find Highly Interpretable Features in Language Models`)
-- **Paper URL:** (arXiv HTML URL preferred: `https://arxiv.org/html/[paper-id]`)
-  - If user provides arXiv ID, construct URL: `https://arxiv.org/html/[id]`
+Read the paper note and extract:
+- **Paper URL:** From frontmatter (arXiv HTML URL preferred)
+- **Paper title:** From frontmatter or file name
+- **Authors:** From frontmatter (if available)
+- **Year:** From frontmatter (if available)
 
-### 2. Fetch paper and extract references
+### 2. Fetch references section from arXiv HTML
 
 **Access paper:**
-- Open paper URL using WebFetch
-- Extract all citations/references from the paper
-- Build reference list: paper titles + authors + citation counts
+- Use paper URL from frontmatter (typically `https://arxiv.org/html/[paper-id]v[version]`)
+- Use WebFetch with prompt focused **only on references section**
+- Skip all paper content (abstract, introduction, methods, results, etc.)
+- Extract **only** the bibliography/references section
 
 **Extract citation data:**
-- Reference list (title, authors, year)
-- Citation frequency (how many times cited in text)
-- Citation context (intro, abstract, methods, results, related work, etc.)
+- Parse reference list to get: titles, authors, years
+- Build structured reference list from bibliography section
+- Reference section is clearly marked on arXiv HTML pages
+
+**WebFetch optimization:**
+- Prompt: "Extract ONLY the bibliography/references section. Ignore all other paper content (abstract, introduction, methods, results). Return reference titles, authors, and years."
+- This signals to skip 90% of paper content and focus only on references
+- Saves tokens by not parsing paper text
+
+**Why arXiv HTML:**
+- ✅ Direct access to paper bibliography
+- ✅ Pre-formatted references (easy to extract)
+- ✅ No API rate limiting or authentication
+- ✅ Reliable and consistent structure across papers
+- ✅ No JavaScript rendering issues
+- ✅ Can optimize WebFetch to skip content (token savings)
 
 ### 3. Read paper note
 
@@ -68,10 +83,11 @@ Ask user:
 - If YES → PASS
 
 **Check 2: Influence level**
-- Count citations in text: `≥2` = influential
-- Is it foundational (cited in abstract/intro)? = influential
-- Single citation in methods/results? = LOW influence (candidate for removal)
-- If influence unclear → ASK user
+- Count how many times the paper is cited in the current paper's text
+- Referenced paper with `≥2` citations in this paper = influential ✓
+- Referenced paper cited once but foundational (cited in abstract/intro)? = influential ✓
+- Referenced paper cited only once in methods/results (low-impact section)? = LOW influence (candidate for removal)
+- If influence is borderline → ask user for judgment
 
 **Check 3: Title formatting**
 - Compare link title against reference list title
@@ -121,17 +137,36 @@ With user approval:
 ## TOKEN EFFICIENCY
 
 **Optimizations:**
-- WebFetch single paper + extract citations (efficient)
-- Use grep on reference section to count mentions: `grep -i "paper_title"`
-- Skip deep content analysis—only scan references section
-- Build simple title→count mapping
+- **arXiv HTML** for direct bibliography access (single WebFetch call)
+- **References-only extraction** via targeted WebFetch prompt
+- Skip all paper content (abstract, intro, methods, results)
+- Bibliography section clearly marked and easy to extract
+- No API calls, no rate limiting, no authentication needed
+- Direct title + author list from bibliography
+- Build simple title→reference mapping
+
+**Why this is efficient:**
+- 1 WebFetch call to arXiv HTML (direct paper access via frontmatter URL)
+- **Targeted prompt skips 90% of paper content** (saves major tokens)
+- Bibliography section is well-formatted and clearly delimited
+- No API dependencies or rate limiting concerns
+- Minimal parsing needed (just extract reference titles)
+- No ambiguity in reference data
+
+**Workflow:**
+1. Read paper note frontmatter for arXiv HTML URL
+2. WebFetch the arXiv HTML page with prompt: "Extract ONLY bibliography/references section. Skip all other content."
+3. Extract bibliography/references section
+4. Build reference list from bibliography
+5. Validate links against reference list
 
 **Avoid:**
-- Reading full paper content (references section only)
-- Fuzzy title matching (use exact references)
-- Checking every single word (only validate links)
+- Semantic Scholar (JavaScript rendering, rate limiting issues)
+- PDF parsing
+- Regex patterns for extraction (bibliography is already structured)
+- Processing full paper text (use targeted prompt instead)
 
-**Expected cost:** ~300-500 tokens per paper (WebFetch + validation)
+**Expected cost:** ~100-150 tokens per paper (1 optimized WebFetch call + validation)
 
 ---
 
@@ -158,11 +193,12 @@ With user approval:
 
 ## SELF-CHECK
 
-✅ Did I fetch the actual paper from the web?
-✅ Did I extract all references from the paper?
-✅ Did I check each link against references?
-✅ Did I assess influence (citation count + context)?
-✅ Did I validate Title Case formatting?
+✅ Did I fetch the arXiv HTML page from the frontmatter URL?
+✅ Did I extract all references from the bibliography section?
+✅ Did I extract reference metadata (title, authors, year)?
+✅ Did I check each link against the bibliography references?
+✅ Did I assess influence (citation count/context in paper)?
+✅ Did I validate Title Case formatting against bibliography titles?
 ✅ Did I check file name convention (: → -)?
 ✅ Did I group findings by severity?
 ✅ Did I get user approval before removing links?
