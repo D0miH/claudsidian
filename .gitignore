@@ -1,0 +1,8 @@
+.obsidian/
+.DS_Store
+settings.local.json
+*.md
+!README.md
+!CLAUDE.md
+!vault_index.md
+!.claude/skills/**/*.md
