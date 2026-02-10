@@ -91,11 +91,13 @@ Examples:
 ## Paper Access Rules
 
 **When searching for papers online:**
-- **ALWAYS** try to find the arXiv HTML version of the paper
-- **DO NOT** download PDFs
-- Use the arXiv HTML interface for reading and extracting information
-- arXiv HTML URLs typically follow the pattern: `https://arxiv.org/html/[paper-id]`
-- Only use PDFs as a last resort if no other option is available
+1. **ALWAYS** try the arXiv HTML version first: `https://arxiv.org/html/[paper-id]`
+2. If HTML is unavailable (404, missing, or incomplete), **download the TeX source**: `https://arxiv.org/src/[paper-id]`
+   - The source is a `.tar.gz` archive — extract it and read the `.tex` files
+   - Focus on the main `.tex` file (often `main.tex` or the largest `.tex` file)
+   - Extract content from the TeX source as you would from HTML
+3. **DO NOT** download PDFs — TeX source is always preferred over PDF
+4. Only use PDFs as a last resort if neither HTML nor TeX source is available
 
 ---
 
@@ -168,9 +170,22 @@ Extract ideas **directly from the paper's content**:
    - Quote or paraphrase from the paper showing where this question/gap appears
    - 1-2 sentence description of what it would explore
    - Note if it's related to any existing project
-3. Ask the user: "Should I create project files for these, or would you like to select specific ones?"
-4. Wait for user response
-5. Only create the approved new projects
+3. **Use `AskUserQuestion` tool** to let the user select which projects to create:
+   - Use `multiSelect: true` so the user can pick multiple projects
+   - Each option: `label` = project title, `description` = 1-line summary of what it explores
+   - Include a "None" option with description "Don't create any new projects"
+   - Example:
+     ```
+     question: "Which projects should I create from this paper?"
+     header: "Projects"
+     multiSelect: true
+     options:
+       - label: "Project Title A", description: "Explores X based on paper's open question about Y"
+       - label: "Project Title B", description: "Tests whether Z holds, motivated by limitation W"
+       - label: "None", description: "Don't create any new projects"
+     ```
+4. Wait for user selection
+5. Only create the selected projects (skip if "None" selected)
 
 Project title examples:
 - `Detecting Representation Drift During Fine-Tuning`
