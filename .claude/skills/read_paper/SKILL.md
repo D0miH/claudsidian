@@ -247,6 +247,13 @@ Before finishing:
 - **VERIFY: Every wiki link is to a file in `Projects/` or `Reading/`**
 - No concept links (attention, transformers, etc.) - only plain text
 
+### 6. Update maintenance counters
+After completing the paper note (and any new projects):
+1. Read `.claude/vault_maintanance.md`
+2. Increment `papers_since_last_audit` by 1
+3. If any **new** project files were created, increment `projects_since_last_audit` by the number of new projects created
+4. Write the updated values back to `.claude/vault_maintanance.md`
+
 ---
 
 ## Output Style
@@ -301,3 +308,7 @@ For EVERY `[[link]]` in the paper note:
 2. All paper-project relationships are now bidirectional ✅
 
 **If uncertain whether something should be a link:** Don't link it. Use plain text.
+
+**Maintenance counters:**
+1. Did I increment `papers_since_last_audit` in `.claude/vault_maintanance.md`? ✅
+2. Did I increment `projects_since_last_audit` for each new project created? ✅

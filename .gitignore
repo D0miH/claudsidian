@@ -6,3 +6,4 @@ settings.local.json
 !CLAUDE.md
 !vault_index.md
 !.claude/skills/**/*.md
+!.claude/vault_maintanance.md

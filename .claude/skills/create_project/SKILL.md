@@ -59,6 +59,11 @@ Study the exact structure before creating.
 - MOC link present
 - No orphan projects
 
+### 6. Update maintenance counters
+1. Read `.claude/vault_maintanance.md`
+2. Increment `projects_since_last_audit` by 1
+3. Write the updated value back to `.claude/vault_maintanance.md`
+
 ---
 
 ## OUTPUT RULES
@@ -79,3 +84,4 @@ Study the exact structure before creating.
 ✅ Does project link to exactly one MOC?
 ✅ Are paper links in Title Case with `[[brackets]]`?
 ✅ No orphan projects created?
+✅ Did I increment `projects_since_last_audit` in `.claude/vault_maintanance.md`?

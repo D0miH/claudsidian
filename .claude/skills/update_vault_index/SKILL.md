@@ -104,6 +104,7 @@ Sort alphabetically within each group.
 
 ### 6. Update vault_maintanance.md
 After writing vault_index.md:
+- Run `date` via Bash to get the current system time
 - Read `.claude/vault_maintanance.md`
 - Update `update_vault_index:` line to current date and time in format `DD-MM-YYYY HH:MM`
 - Write the updated file

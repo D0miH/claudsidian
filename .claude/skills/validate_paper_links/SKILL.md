@@ -137,6 +137,7 @@ With user approval:
 
 ### 7. Update vault_maintanance.md
 After completing validation (regardless of whether fixes were applied):
+- Run `date` via Bash to get the current system time
 - Read `.claude/vault_maintanance.md`
 - Update `validate_paper_links:` line to current date and time in format `DD-MM-YYYY HH:MM`
 - Write the updated file
