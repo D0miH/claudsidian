@@ -30,10 +30,15 @@ Fast audit of vault structure to catch:
 ## WORKFLOW
 
 ### 1. Get audit scope
+Read `.claude/vault_maintanance.md` and note the `audit_links:` timestamp.
+
 Ask user:
 - **Full audit?** (scan entire vault)
 - **Targeted audit?** (specific project, paper, or MOC)
 - **Quick scan?** (only orphans + broken bidirectional links)
+- **Incremental?** (only files modified since last run: `audit_links:` timestamp)
+
+If incremental: use `find Reading/ Projects/ MOCs/ -newer` against the last-run timestamp to scope the file set.
 
 ### 2. Run lightweight scan
 
@@ -79,6 +84,19 @@ Only with user approval:
 - Remove forbidden concept links
 - Remove paper→MOC links
 
+### 6. Update vault_maintanance.md
+After completing the audit (regardless of whether fixes were applied):
+- Read `.claude/vault_maintanance.md`
+- Update `audit_links:` line to current date and time in format `DD-MM-YYYY HH:MM`
+- Reset `papers_since_last_audit:` to `0`
+- Reset `projects_since_last_audit:` to `0`
+- Write the updated file
+
+**Example update:**
+```
+audit_links: 10-02-2026 14:35
+```
+
 ---
 
 ## TOKEN EFFICIENCY
@@ -116,3 +134,4 @@ Only with user approval:
 ✅ Did I find paper→MOC direct links?
 ✅ Report grouped by violation type?
 ✅ Did I get user approval before fixing?
+✅ Did I update vault_maintanance.md with current timestamp and reset counters?

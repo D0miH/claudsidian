@@ -20,6 +20,9 @@ The vault index is the **entry point** to your research graph (per CLAUDE.md rul
 
 ## WORKFLOW
 
+### 0. Read last-run timestamp
+Read `.claude/vault_maintanance.md` and note the `update_vault_index:` timestamp. This can be used to scope the scan to only files modified since the last run if the user requests an incremental update.
+
 ### 1. Scan vault structure
 
 **Scan directories:**
@@ -99,7 +102,18 @@ Sort alphabetically within each group.
 - Verify all wiki links use exact file names
 - Verify no broken links
 
-### 6. Verify output
+### 6. Update vault_maintanance.md
+After writing vault_index.md:
+- Read `.claude/vault_maintanance.md`
+- Update `update_vault_index:` line to current date and time in format `DD-MM-YYYY HH:MM`
+- Write the updated file
+
+**Example update:**
+```
+update_vault_index: 10-02-2026 14:35
+```
+
+### 7. Verify output
 
 ✅ All MOCs present with descriptions
 ✅ All seed projects listed (status: seed)
@@ -149,3 +163,4 @@ Sort alphabetically within each group.
 ✅ Did I keep descriptions to 1 line max?
 ✅ Did I verify no broken links in output?
 ✅ Did I preserve vault_index.md structure exactly?
+✅ Did I update vault_maintanance.md with current timestamp?

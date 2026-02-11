@@ -33,6 +33,9 @@ Validate all `[[Paper Title]]` links in a paper note against the actual paper's 
 
 ## WORKFLOW
 
+### 0. Read last-run timestamp
+Read `.claude/vault_maintanance.md` and note the `validate_paper_links:` timestamp. When validating multiple papers, prioritize papers in `Reading/` that were modified after this timestamp.
+
 ### 1. Get paper and note details
 
 Read the paper note and extract:
@@ -132,6 +135,17 @@ With user approval:
 - **Update note:** Save corrected paper note
 - **Verify:** Re-scan to confirm all links now valid
 
+### 7. Update vault_maintanance.md
+After completing validation (regardless of whether fixes were applied):
+- Read `.claude/vault_maintanance.md`
+- Update `validate_paper_links:` line to current date and time in format `DD-MM-YYYY HH:MM`
+- Write the updated file
+
+**Example update:**
+```
+validate_paper_links: 10-02-2026 14:35
+```
+
 ---
 
 ## TOKEN EFFICIENCY
@@ -203,3 +217,4 @@ With user approval:
 ✅ Did I group findings by severity?
 ✅ Did I get user approval before removing links?
 ✅ Did I verify all remaining links are valid?
+✅ Did I update vault_maintanance.md with current timestamp?
