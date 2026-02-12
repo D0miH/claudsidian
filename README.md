@@ -1,5 +1,5 @@
-# CLAUDEsidian
-AI-enhanced Obsidian research vault for academic paper reading and project management.
+# CLAUDEsidian - CLAUDE x Obsidian
+Bring Claude into Obsidian for an AI-enhanced Obsidian research vault for academic paper reading and project management.
 
 ---
 

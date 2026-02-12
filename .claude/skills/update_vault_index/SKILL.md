@@ -107,6 +107,8 @@ After writing vault_index.md:
 - Run `date` via Bash to get the current system time
 - Read `.claude/vault_maintanance.md`
 - Update `update_vault_index:` line to current date and time in format `DD-MM-YYYY HH:MM`
+- Reset `papers_since_vault_index:` to `0`
+- Reset `projects_since_vault_index:` to `0`
 - Write the updated file
 
 **Example update:**

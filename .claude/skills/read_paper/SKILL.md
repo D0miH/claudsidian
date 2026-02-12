@@ -250,8 +250,8 @@ Before finishing:
 ### 6. Update maintenance counters
 After completing the paper note (and any new projects):
 1. Read `.claude/vault_maintanance.md`
-2. Increment `papers_since_last_audit` by 1
-3. If any **new** project files were created, increment `projects_since_last_audit` by the number of new projects created
+2. Increment `papers_since_audit_links`, `papers_since_vault_index`, and `papers_since_validate_links` each by 1
+3. If any **new** project files were created, increment `projects_since_audit_links` and `projects_since_vault_index` each by the number of new projects created
 4. Write the updated values back to `.claude/vault_maintanance.md`
 
 ---
@@ -310,5 +310,5 @@ For EVERY `[[link]]` in the paper note:
 **If uncertain whether something should be a link:** Don't link it. Use plain text.
 
 **Maintenance counters:**
-1. Did I increment `papers_since_last_audit` in `.claude/vault_maintanance.md`? ✅
-2. Did I increment `projects_since_last_audit` for each new project created? ✅
+1. Did I increment `papers_since_audit_links`, `papers_since_vault_index`, `papers_since_validate_links` in `.claude/vault_maintanance.md`? ✅
+2. Did I increment `projects_since_audit_links` and `projects_since_vault_index` for each new project created? ✅

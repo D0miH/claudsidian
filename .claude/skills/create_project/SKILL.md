@@ -61,8 +61,8 @@ Study the exact structure before creating.
 
 ### 6. Update maintenance counters
 1. Read `.claude/vault_maintanance.md`
-2. Increment `projects_since_last_audit` by 1
-3. Write the updated value back to `.claude/vault_maintanance.md`
+2. Increment `projects_since_audit_links` and `projects_since_vault_index` each by 1
+3. Write the updated values back to `.claude/vault_maintanance.md`
 
 ---
 
@@ -84,4 +84,4 @@ Study the exact structure before creating.
 ✅ Does project link to exactly one MOC?
 ✅ Are paper links in Title Case with `[[brackets]]`?
 ✅ No orphan projects created?
-✅ Did I increment `projects_since_last_audit` in `.claude/vault_maintanance.md`?
+✅ Did I increment `projects_since_audit_links` and `projects_since_vault_index` in `.claude/vault_maintanance.md`?

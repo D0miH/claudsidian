@@ -221,13 +221,13 @@ tags: [moc, index]
 
 ## Maintenance Reminder Rules
 
-If papers_since_last_audit ≥ 5 OR projects_since_last_audit ≥ 5,
+If papers_since_audit_links ≥ 5 OR projects_since_audit_links ≥ 5,
 Claude may suggest running /audit_links.
 
-If papers_since_last_audit ≥ 3 OR projects_since_last_audit ≥ 3,
+If papers_since_vault_index ≥ 3 OR projects_since_vault_index ≥ 3,
 Claude may suggest running /update_vault_index.
 
-If papers_since_last_audit ≥ 5,
+If papers_since_validate_links ≥ 5,
 Claude may suggest running /validate_paper_links.
 
 Claude must never run maintenance automatically.
