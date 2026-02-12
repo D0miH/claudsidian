@@ -21,7 +21,15 @@ The vault index is the **entry point** to your research graph (per CLAUDE.md rul
 ## WORKFLOW
 
 ### 0. Read last-run timestamp
-Read `.claude/vault_maintanance.md` and note the `update_vault_index:` timestamp. This can be used to scope the scan to only files modified since the last run if the user requests an incremental update.
+Read `.claude/vault_maintanance.md` and note the `update_vault_index:` timestamp.
+
+**Default: incremental scan** — only process files modified after the `update_vault_index:` timestamp.
+Use `find Projects/ MOCs/ -newer <reference_file>` to identify changed files.
+To use a reference file: `touch -t YYYYMMDDHHMI /tmp/vault_index_ref && find ... -newer /tmp/vault_index_ref`
+
+- If no files were modified: skip the scan and report "Index already up to date."
+- Only run a full rescan if the user explicitly requests it or no timestamp exists yet.
+- Always do a full scan of `Projects/` for status categorization even in incremental mode (status may have changed without file modification time changing).
 
 ### 1. Scan vault structure
 

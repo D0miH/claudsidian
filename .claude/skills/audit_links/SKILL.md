@@ -32,13 +32,13 @@ Fast audit of vault structure to catch:
 ### 1. Get audit scope
 Read `.claude/vault_maintanance.md` and note the `audit_links:` timestamp.
 
-Ask user:
-- **Full audit?** (scan entire vault)
-- **Targeted audit?** (specific project, paper, or MOC)
-- **Quick scan?** (only orphans + broken bidirectional links)
-- **Incremental?** (only files modified since last run: `audit_links:` timestamp)
+**Default: incremental scan** — only files modified after the `audit_links:` timestamp.
+Use `find Reading/ Projects/ MOCs/ -newer <reference_file>` to scope the file set.
+To use a reference file, write the timestamp as a temp file: `touch -t YYYYMMDDHHMI /tmp/audit_ref && find ... -newer /tmp/audit_ref`
 
-If incremental: use `find Reading/ Projects/ MOCs/ -newer` against the last-run timestamp to scope the file set.
+Only run a full scan if:
+- The user explicitly requests it ("full audit", "scan everything")
+- No `audit_links:` timestamp exists yet
 
 ### 2. Run lightweight scan
 

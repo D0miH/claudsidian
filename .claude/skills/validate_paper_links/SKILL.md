@@ -34,7 +34,14 @@ Validate all `[[Paper Title]]` links in a paper note against the actual paper's 
 ## WORKFLOW
 
 ### 0. Read last-run timestamp
-Read `.claude/vault_maintanance.md` and note the `validate_paper_links:` timestamp. When validating multiple papers, prioritize papers in `Reading/` that were modified after this timestamp.
+Read `.claude/vault_maintanance.md` and note the `validate_paper_links:` timestamp.
+
+**Default: incremental scan** — only validate papers in `Reading/` modified after the `validate_paper_links:` timestamp.
+Use `find Reading/ -newer <reference_file>` to identify changed paper notes.
+To use a reference file: `touch -t YYYYMMDDHHMI /tmp/validate_ref && find Reading/ -newer /tmp/validate_ref`
+
+- If no papers were modified: skip and report "All paper links already validated."
+- Only run a full rescan if the user explicitly requests it or no timestamp exists yet.
 
 ### 1. Get paper and note details
 
