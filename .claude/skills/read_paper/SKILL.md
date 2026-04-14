@@ -90,14 +90,29 @@ Examples:
 
 ## Paper Access Rules
 
-**When searching for papers online:**
+**Step 0: Determine what the URL points to**
+- **Always fetch the URL first** using `WebFetch` to inspect the response
+- Check whether the response is PDF binary data or readable HTML/text
+- Signs of a PDF response: binary/garbled content, mentions of "PDF binary data", `application/pdf` content type, or the tool saving a `.pdf` file locally
+- Signs of an HTML response: readable structured text, title/abstract visible, normal markdown output
+
+**If the fetched content is a PDF (binary, unreadable):**
+1. **Read the locally saved PDF file** using the `Read` tool on the path reported in the WebFetch result (e.g., `/Users/.../.pdf`)
+2. For large PDFs (> 10 pages), read in chunks using the `pages` parameter (e.g., `pages: "1-10"`, then `"11-20"`, etc.)
+3. **DO NOT** perform any web search or look for an arXiv version
+4. Use the original URL as the `url` frontmatter field in the paper note
+
+**If the fetched content is readable HTML:**
+1. Extract all paper content directly from the WebFetch response
+2. Use the URL as the `url` frontmatter field
+
+**When given a non-URL input (arXiv ID, paper title, DOI):**
 1. **ALWAYS** try the arXiv HTML version first: `https://arxiv.org/html/[paper-id]`
 2. If HTML is unavailable (404, missing, or incomplete), **download the TeX source**: `https://arxiv.org/src/[paper-id]`
    - The source is a `.tar.gz` archive — extract it and read the `.tex` files
    - Focus on the main `.tex` file (often `main.tex` or the largest `.tex` file)
    - Extract content from the TeX source as you would from HTML
-3. **DO NOT** download PDFs — TeX source is always preferred over PDF
-4. Only use PDFs as a last resort if neither HTML nor TeX source is available
+3. Only use PDFs as a last resort if neither HTML nor TeX source is available
 
 ---
 
@@ -119,6 +134,7 @@ Study the structure before creating the paper note.
 - **Do NOT remove subsection headings or prompts**
 - **Link to existing projects immediately** in "Linked Research Projects"
 - **Only propose new projects** - don't create them yet
+- If the paper itself mentions a code repository (e.g., a GitHub link in the abstract, introduction, or footnotes), add that URL to the `code` property in the frontmatter; otherwise leave it empty — **do NOT search online for a code repo**
 
 ### 2. Fill template sections
 Answer each subsection prompt with bullet points:
@@ -187,6 +203,11 @@ Extract ideas **directly from the paper's content**:
 4. Wait for user selection
 5. Only create the selected projects (skip if "None" selected)
 
+**Novelty and feasibility assessment (for each proposed project):**
+- **novelty** (1–10): How novel is the idea relative to existing work? (1 = incremental, 10 = highly original)
+- **feasibility** (1–10): How feasible is it to execute with current methods/resources? (1 = very difficult, 10 = straightforward)
+- Assess both scores based on the paper's content and context; include them in the description shown to the user
+
 Project title examples:
 - `Detecting Representation Drift During Fine-Tuning`
 - `Preventing Emergent Misalignment via Gradient Monitoring`
@@ -195,6 +216,7 @@ For each approved new project:
 - create a new file in `Projects/`
 - use `Templates/Project.md` as template
 - status: `seed`
+- fill `novelty` and `feasibility` frontmatter fields with assessed 1–10 scores
 - add **1–3 bullet points minimum**
 - link the current paper under **Relevant Papers**
 
@@ -308,6 +330,10 @@ For EVERY `[[link]]` in the paper note:
 2. All paper-project relationships are now bidirectional ✅
 
 **If uncertain whether something should be a link:** Don't link it. Use plain text.
+
+**New projects:**
+1. Did I fill `novelty` (1–10) in each new project's frontmatter? ✅
+2. Did I fill `feasibility` (1–10) in each new project's frontmatter? ✅
 
 **Maintenance counters:**
 1. Did I increment `papers_since_audit_links`, `papers_since_vault_index`, `papers_since_validate_links` in `.claude/vault_maintanance.md`? ✅
